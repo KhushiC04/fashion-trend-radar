@@ -18,7 +18,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install pytrends pandas requests
+        run: pip install pytrends pandas requests matplotlib
 
       - name: Run trend data script
         run:  python fashion_trend_radar_datacollection.py
