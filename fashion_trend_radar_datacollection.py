@@ -139,3 +139,7 @@ for i, keyword in enumerate(keywords):
 
 plt.tight_layout()
 plt.show()
+
+# Save the final combined data so GitHub Actions can commit it
+combined.to_csv('trend_data_latest.csv')
+print("Data saved to trend_data_latest.csv")
