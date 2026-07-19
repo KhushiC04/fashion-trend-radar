@@ -8,7 +8,7 @@ Original file is located at
 """
 
 # Step 1: Install libraries we need
-!pip install pytrends praw pandas
+
 
 import time
 from pytrends.request import TrendReq
