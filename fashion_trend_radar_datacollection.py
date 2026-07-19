@@ -23,59 +23,12 @@ pytrends.build_payload(keywords, timeframe='today 3-m', geo='')
 trend_data = pytrends.interest_over_time()
 trend_data.head()
 
-# Step 2b: Compare India vs US trends side-by-side
-import pandas as pd
-import time
 
-# Pull US data
-pytrends.build_payload(keywords, timeframe='today 3-m', geo='US')
-us_data = pytrends.interest_over_time().drop(columns='isPartial')
-us_data['market'] = 'US'
 
-time.sleep(2)  # be polite to Google's servers, avoid getting rate-limited
-
-# Pull India data
-pytrends.build_payload(keywords, timeframe='today 3-m', geo='IN')
-in_data = pytrends.interest_over_time().drop(columns='isPartial')
-in_data['market'] = 'India'
-
-# Combine into one table
-combined = pd.concat([us_data, in_data])
-combined.head()
-
-# Step 2b: Compare India vs US trends side-by-side
-import time
-
-# Pull US data
-pytrends.build_payload(keywords, timeframe='today 3-m', geo='US')
-us_data = pytrends.interest_over_time().drop(columns='isPartial')
-us_data['market'] = 'US'
-
-time.sleep(2)  # be polite to Google's servers, avoid getting rate-limited
-
-# Pull India data
-pytrends.build_payload(keywords, timeframe='today 3-m', geo='IN')
-in_data = pytrends.interest_over_time().drop(columns='isPartial')
-in_data['market'] = 'India'
-
-# Combine into one table
-combined = pd.concat([us_data, in_data])
-combined.head()
 
 combined.tail()   # shows the LAST 5 rows instead of first
 
-import requests
 
-url = "https://www.reddit.com/r/FemaleFashionAdvice/top.json?limit=25"
-
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-}
-
-response = requests.get(url, headers=headers)
-
-print("Status code:", response.status_code)
-print(response.text[:300])
 
 # Step: Separate US and India data for comparison
 us_only = combined[combined['market'] == 'US'].drop(columns='market')
