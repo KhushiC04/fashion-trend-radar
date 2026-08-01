@@ -8,7 +8,25 @@ Original file is located at
 """
 
 # Step 1: Install libraries we need
+import time
+from pytrends.request import TrendReq
 
+def fetch_with_retry(pytrends_obj, keywords, timeframe, geo, max_attempts=3):
+    for attempt in range(max_attempts):
+        try:
+            pytrends_obj.build_payload(keywords, timeframe=timeframe, geo=geo)
+            data = pytrends_obj.interest_over_time()
+            print(f"Success on attempt {attempt + 1}")
+            return data
+        except Exception as e:
+            print(f"Attempt {attempt + 1} failed: {e}")
+            if attempt < max_attempts - 1:
+                wait_time = 90 * (attempt + 1)
+                print(f"Waiting {wait_time} seconds before retry...")
+                time.sleep(wait_time)
+            else:
+                print("All retry attempts failed.")
+                raise
 
 import time
 from pytrends.request import TrendReq
@@ -18,10 +36,25 @@ pytrends = TrendReq(hl='en-US', tz=330)
 keywords = ["quiet luxury", "cottagecore", "clean girl aesthetic", "cruelty free skincare"]
 
 time.sleep(5)  # small safety pause before first request
-pytrends.build_payload(keywords, timeframe='today 3-m', geo='')
+trend_data = fetch_with_retry(pytrends, keywords, 'today 3-m', '')
 
-trend_data = pytrends.interest_over_time()
+
 trend_data.head()
+
+# Pull US data
+us_data = fetch_with_retry(pytrends, keywords, 'today 3-m', 'US').drop(columns='isPartial')
+us_data['market'] = 'US'
+
+time.sleep(5)  # pause between requests
+
+# Pull India data
+in_data = fetch_with_retry(pytrends, keywords, 'today 3-m', 'IN').drop(columns='isPartial')
+in_data['market'] = 'India'
+
+# Combine into one table
+import pandas as pd
+combined = pd.concat([us_data, in_data])
+combined.head()
 
 
 
