@@ -3,8 +3,11 @@
 A live data pipeline tracking rising fashion micro-trends and Gen Z quality/values 
 signals, built to help brands catch trend changes before competitors do.
 
-🔗 **[View Live Dashboard on Tableau Public](YOUR_TABLEAU_PUBLIC_LINK_HERE)**
+## Live Dashboards
 
+🔗 **[View Live Interactive Dashboard on Tableau Public](https://public.tableau.com/app/profile/khushi.chandel/viz/Fashion_Trend_Radar/Dashboard1?publish=yes)** — Explore the interactive dashboard directly in your browser; no installation required.
+
+💻 **Power BI Desktop:** `Fashion_Trend_Radar_Dashboard.pbix` — Connects to this repository's latest dataset and can be refreshed on open (requires Power BI Desktop).
 ## Business Problem
 Fast fashion brands often react to micro-trends 3-6 months too late, and may be 
 missing a broader quality/trust gap that erodes customer confidence.
