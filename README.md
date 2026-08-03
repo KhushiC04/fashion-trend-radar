@@ -1,29 +1,45 @@
 # Fashion Trend Radar
 
-A live data pipeline tracking rising fashion micro-trends and Gen Z values-shift signals, built to help brands catch trend changes before competitors do.
+A live data pipeline tracking rising fashion micro-trends and Gen Z quality/values 
+signals, built to help brands catch trend changes before competitors do.
+
+🔗 **[View Live Dashboard on Tableau Public](YOUR_TABLEAU_PUBLIC_LINK_HERE)**
 
 ## Business Problem
-Fast fashion brands often react to micro-trends 3-6 months too late, and are missing a broader values shift — Gen Z increasingly chooses brands based on trust, cruelty-free ethics, and quality, not just trend-following.
+Fast fashion brands often react to micro-trends 3-6 months too late, and may be 
+missing a broader quality/trust gap that erodes customer confidence.
 
 ## Business Question
-Which rising micro-trends are brands currently ignoring, and are they missing the Gen Z values shift?
+Which rising micro-trends are brands currently under-reacting to, and does 
+customer sentiment reveal quality gaps brands are missing?
 
 ## Data Sources
 - **Google Trends API** (via pytrends) — live search interest data, US vs India comparison
-- **Reddit** — community discussion data for sentiment/values analysis
+- **Women's E-Commerce Clothing Reviews** (Kaggle) — 22,000+ real customer reviews for sentiment analysis
 
 ## Tech Stack
-- Python (data collection, cleaning, correlation analysis)
-- SQL (data querying)
-- Excel (initial exploration)
-- Power BI (interactive dashboard)
-- GitHub Actions (automated daily data refresh)
+- **Python** — data collection, cleaning, correlation analysis, sentiment analysis (TextBlob, NLTK)
+- **SQL** (SQLite) — data querying and validation
+- **Excel** — pivot table analysis and visualization
+- **Power BI** — interactive dashboard, connected live to GitHub-hosted data
+- **Tableau Public** — published interactive dashboard
+- **GitHub Actions** — fully automated daily data refresh (retry logic for API rate-limiting)
 
-## Key Finding (so far)
-US and India fashion trends don't simply follow the same timeline — for
-keywords like "cottagecore," India shows almost no engagement for months
-while the US sustains strong interest, suggesting some trends may emerge
-independently rather than following a predictable delay.
+## Key Findings
+1. **Trend divergence:** US and India fashion trends don't simply follow the same 
+   timeline — cottagecore shows sustained US interest while India shows minimal 
+   engagement, suggesting some trends emerge independently rather than following 
+   a predictable delay.
+2. **Quality over values:** The "Trend" clothing category shows the lowest customer 
+   sentiment (0.20 vs ~0.25 elsewhere). Analysis of negative reviews reveals the 
+   driver is fit/fabric quality inconsistency, not values-based concerns — 
+   suggesting brands chasing trend speed risk measurable quality-driven trust erosion.
+
+## Automation
+This pipeline runs daily via GitHub Actions, pulling fresh Google Trends data and 
+committing it automatically — verifiable in the commit history. Includes retry 
+logic to handle API rate-limiting gracefully.
 
 ## Status
-🚧 In active development — Python analysis complete, SQL/Power BI/Excel in progress.
+✅ Complete — Python, SQL, Excel, sentiment analysis, Power BI, and Tableau Public 
+dashboard all built and functioning.
